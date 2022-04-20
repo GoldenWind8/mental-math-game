@@ -1,5 +1,6 @@
 import './App.css';
 import {useState} from "react";
+import GameScreen from "./GameScreen";
 
 async function getData()
 {
@@ -12,7 +13,10 @@ async function getData()
 function MyButton({name, onClick, count}) {
     getData();
   return (
-         <button onClick={onClick}>{name} : {count}</button>
+         <>
+             <button onClick={onClick}>{name} : {count}</button>
+             <GameScreen/>
+         </>
   );
 }
 
