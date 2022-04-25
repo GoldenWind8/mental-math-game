@@ -10,24 +10,17 @@ async function getData()
 }
 
 
-function MyButton({name, onClick, count}) {
+function GameStart() {
     getData();
   return (
          <>
              <h1>THE GAME HAS BEGUN</h1>
-             <button onClick={onClick}>{name} : {count}</button>
-
          </>
   );
 }
 
 function App() {
-    const[count, setCount] = useState(0);
     const[gameState, setGameState] = useState(0);
-
-    function handleClick(){
-        setCount(count + 1)
-    }
 
     function startGame(){
         setGameState(1)
@@ -45,7 +38,7 @@ function App() {
     {
         return(
           <>
-              <MyButton name = "Button 1" onClick = {handleClick} count = {count}/>
+              <GameStart name = "Button 1"/>
           </>
         );
     }
