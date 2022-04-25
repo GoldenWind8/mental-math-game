@@ -1,5 +1,6 @@
 import './App.css';
 import {useState} from "react";
+import HomePage from "./HomePage";
 
 async function getData()
 {
@@ -12,21 +13,43 @@ async function getData()
 function MyButton({name, onClick, count}) {
     getData();
   return (
-         <button onClick={onClick}>{name} : {count}</button>
+         <>
+             <h1>THE GAME HAS BEGUN</h1>
+             <button onClick={onClick}>{name} : {count}</button>
+
+         </>
   );
 }
 
 function App() {
     const[count, setCount] = useState(0);
+    const[gameState, setGameState] = useState(0);
+
     function handleClick(){
         setCount(count + 1)
     }
 
-    return (
-        <div>
-            <MyButton name = "Button 1" onClick = {handleClick} count = {count}/>
-        </div>
-    );
+    function startGame(){
+        setGameState(1)
+    }
+
+    if(gameState == 0)
+    {
+        return (
+            <>
+                <HomePage startGameMethod = {startGame}/>
+            </>
+        );
+    }
+    else
+    {
+        return(
+          <>
+              <MyButton name = "Button 1" onClick = {handleClick} count = {count}/>
+          </>
+        );
+    }
+
 }
 
 export default App;
