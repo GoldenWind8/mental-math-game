@@ -1,6 +1,7 @@
 import './App.css';
 import {useState} from "react";
 import HomePage from "./HomePage";
+import GameScreen from "./GameScreen";
 
 async function getData()
 {
@@ -38,7 +39,7 @@ function App() {
     {
         return(
           <>
-              <GameStart name = "Button 1"/>
+              <GameScreen/>
           </>
         );
     }
