@@ -3,6 +3,7 @@ import {useState} from "react";
 
 function getData()
 {
+    //TODO switch to using API however API is not working
     //const response = await fetch('https://x-math.herokuapp.com/api/random');
     //const jsonData = await response.json();
     let jsonData= {
@@ -15,7 +16,7 @@ function getData()
 function Score({score})
 {
     return (
-        <div className ="ScoreDiv">
+        <div className ="score-div">
             <h1>Score: {score}</h1>
         </div>);
 }
@@ -34,7 +35,6 @@ function UserInput({onSubmitClick})
 
 function LoadQuestion({question})
 {
-    console.log(question);
     return(
         <div>
             <h1>Question is: {question.expression}</h1>
@@ -45,25 +45,30 @@ function LoadQuestion({question})
 
 
 
-export default function GameScreen()
+export default function GameScreen({endGameMethod})
 {
     const [score,setScore] = useState(10);
     let jsonQuestion = getData();
 
     function changeScore(answer)
     {
-        if (answer == jsonQuestion.answer)
+        if (answer === jsonQuestion.answer)
         {
             setScore(score + 10);
         }
         else
         {
-            setScore(score - 5)
+            setScore(score - 5);
+            if(score < -19)
+            {
+                console.log("Game should end");
+                endGameMethod();
+            }
         }
     }
 
     return (
-        <div className={"centerDiv"}>
+        <div className={"center"}>
             <Score score = {score}/>
             <LoadQuestion question={jsonQuestion}/>
             <UserInput onSubmitClick={changeScore} />
