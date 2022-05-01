@@ -26,7 +26,7 @@ function UserInput({onSubmitClick})
     const [userInput, setUserInput] = useState("");
     return (
         <>
-            <input placeholder={"Enter answer here: "} value = {userInput} onChange={e => setUserInput(e.target.value)} />
+            <input placeholder={"Enter answer here: "} value = {userInput} onChange={e => setUserInput(e.target.value)} type="number" />
 
             <button onClick={() => onSubmitClick(userInput)}> Submit!</button>
         </>
