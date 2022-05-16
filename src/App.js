@@ -1,46 +1,43 @@
 import './App.css';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import HomePage from "./HomePage";
+import GameScreen from "./GameScreen";
 
-async function getData()
-{
-    const response = await fetch('https://x-math.herokuapp.com/api/random');
-    const jsonData = await response.json();
-    console.log(jsonData);
-}
-
-
-function GameStart() {
-    getData();
-  return (
-         <>
-             <h1>THE GAME HAS BEGUN</h1>
-         </>
-  );
-}
+const GAME_STATE_LOSE = -1;
+const GAME_STATE_WIN = 10;
 
 function App() {
     const[gameState, setGameState] = useState(0);
+    const [score,setScore] = useState(0);
+
+    useEffect(
+        () => {updateGame(score)}, [score]
+    )
 
     function startGame(){
         setGameState(1)
     }
 
-    if(gameState == 0)
+    function updateGame(score)
     {
-        return (
-            <>
-                <HomePage startGameMethod = {startGame}/>
-            </>
-        );
+        if(score > 50)
+        {
+            setGameState(GAME_STATE_WIN)
+        }
+        else if(score <= -15)
+        {
+            setGameState(GAME_STATE_LOSE)
+        }
+    }
+
+
+    if(gameState === 1)
+    {
+        return <GameScreen endGameMethod = {setGameState} score={score} setScore={setScore} />;
     }
     else
     {
-        return(
-          <>
-              <GameStart name = "Button 1"/>
-          </>
-        );
+        return <HomePage startGameMethod = {startGame} gameState = {gameState} />;
     }
 
 }

@@ -1,0 +1,13 @@
+.score-div{
+    background-color: aquamarine;
+}
+
+.center{
+    font-family: arial;
+    font-size: 24px;
+    margin: 25px;
+    width: 700px;
+    height: 400px;
+    align-self: center;
+    outline: dot-dash;
+}
